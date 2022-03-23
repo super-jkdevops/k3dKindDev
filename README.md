@@ -1,5 +1,8 @@
 # kubernetes-fleet
 
+## Requisites
+Before you starte please install docker on your host!
+
 ## K3D
 
 ```
@@ -12,6 +15,14 @@
 ***dev***: 1x control plane + 3x worker node<br>
 ***stage***: 1x control plane + 4x worker node<br>
 ***prod***: 3x control plane + 5x worker node<br>
+
+### Installation
+
+```
+curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.12.0/kind-linux-amd64
+sudo chmod +x ./kind
+sudo mv ./kind /usr/local/bin/kind
+```
 
 ### Create K3D clusters
 
@@ -44,6 +55,11 @@ k3d cluster create --config=./k3d/prod-config.yaml
 ***dev***: 1x control plane + 1x worker node<br>
 ***stage***: 1x control plane + 2x worker node<br>
 ***prod***: 3x control plane + 3x worker node<br>
+
+### Installation
+```
+curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
+```
 
 ### Create KIND clusters
 
