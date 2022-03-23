@@ -9,9 +9,9 @@
 └── stage-config.yaml
 ```
 
-***dev***: 1x control plane + 3x worker node
-***stage***: 1x control plane + 4x worker node
-***prod***: 3x control plane + 5x worker node
+***dev***: 1x control plane + 3x worker node<br>
+***stage***: 1x control plane + 4x worker node<br>
+***prod***: 3x control plane + 5x worker node<br>
 
 ### Create K3D clusters
 
@@ -41,9 +41,9 @@ k3d cluster create --config=./k3d/prod-config.yaml
 └── stage-config-1c-2w.yaml
 ```
 
-***dev***: 1x control plane + 1x worker node
-***stage***: 1x control plane + 2x worker node
-***prod***: 3x control plane + 3x worker node
+***dev***: 1x control plane + 1x worker node<br>
+***stage***: 1x control plane + 2x worker node<br>
+***prod***: 3x control plane + 3x worker node<br>
 
 ### Create KIND clusters
 
