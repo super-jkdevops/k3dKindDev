@@ -41,6 +41,8 @@ k3d cluster create --config=./k3d/stage-config.yaml
 k3d cluster create --config=./k3d/prod-config.yaml
 ```
 
+If you need use specific version please visit [here](./K3D-VERSIONS.md)
+
 ---
 
 ## KIND
