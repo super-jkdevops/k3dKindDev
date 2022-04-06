@@ -2,37 +2,36 @@
 kind: Simple
 apiVersion: k3d.io/v1alpha4
 metadata:
-  name: prod-cluster
+  name: dev-cluster-121
 servers: 1
-agents: 5
-image: docker.io/rancher/k3s:v1.22.6-k3s1
-subnet: "172.27.0.0/16"
+agents: 1
+image: docker.io/rancher/k3s:v1.21.11-k3s1
+subnet: "172.20.0.0/16"
 ports:
 # For vCluster
-- port: 4445:443
+- port: 4450:443
   nodeFilters:
   - loadbalancer
 # For ArgoCD
-- port: 8092:8080
+- port: 18090:8080
   nodeFilters:
   - loadbalancer
-- port: 8445:8443
+- port: 18443:8443
   nodeFilters:
   - loadbalancer
 # For sample application
-- port: 9200:9090
+- port: 19090:9090
   nodeFilters:
   - loadbalancer
-- port: 9201:9091
+- port: 19091:9091
   nodeFilters:
   - loadbalancer
-- port: 9202:9092
+- port: 19092:9092
   nodeFilters:
   - loadbalancer
-- port: 9203:9093
+- port: 19093:9093
   nodeFilters:
   - loadbalancer
-
 options:
   k3d:
     wait: true

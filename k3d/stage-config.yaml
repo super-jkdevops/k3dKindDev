@@ -2,7 +2,7 @@
 kind: Simple
 apiVersion: k3d.io/v1alpha4
 metadata:
-  name: stage
+  name: stage-cluster
 servers: 1
 agents: 4
 image: docker.io/rancher/k3s:v1.22.6-k3s1
