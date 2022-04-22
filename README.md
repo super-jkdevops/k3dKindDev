@@ -88,7 +88,7 @@ $ ./utils/k3d-wrapper.sh -c pprod-cluster
 👀 Kubernetes cluster config: pprod-cluster.conf does not exist! Please check k3d dir! 
 ```
 
-**Deploy cluster with particular configuration**
+#### Deploy cluster with particular configuration
 Below configuration contains istio deployment. Be patient this process
 can take a while!
 
