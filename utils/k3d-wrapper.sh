@@ -1,6 +1,7 @@
 #!/bin/bash
 # WHEN:        WHO:             WHAT:
 # 04/08/2022   Janusz Kujawa    Created initial parts of script.
+# 04/22/2022   Janusz Kujawa	Added invalid_option function
 
 ### Variables
 clustername="${2:-"dev-cluster"}"
@@ -18,14 +19,8 @@ usage() {
    exit 0
 }
 
-no_option() {  
-  echo "No option given!" 
-  usage                         
-  exit 1
-}
-
 invalid_option() {
-  echo "Option invalid!"
+  echo "Invalid or no option given!"
   usage
   exit 1
 }
@@ -93,6 +88,11 @@ function list_k3d_cluster {
   fi
 }
 
+# check if argument given
+if [[ ! $@ =~ ^\-.+ ]]
+  then
+    invalid_option
+  fi
 
 while getopts "hcdl" options; do            
                                                                                         
@@ -110,9 +110,6 @@ while getopts "hcdl" options; do
       ;;
     l)
       list_k3d_cluster
-      ;;
-    \?)
-      invalid_option
       ;;
     *)                                        
       invalid_option                        
