@@ -1,10 +1,11 @@
 #!/bin/bash
 # WHEN:        WHO:             WHAT:
 # 04/08/2022   Janusz Kujawa    Created initial parts of script.
-# 04/22/2022   Janusz Kujawa	Added invalid_option function
+# 04/22/2022   Janusz Kujawa	  Added invalid_option function
+# 14/06/2022   Janusz Kujawa    Adjust script to use within GH actions
 
 ### Variables
-clustername="${2:-"dev-cluster"}"
+clustername="${2:-"small"}"
 k3d_log="/tmp/$clustername-create.log"
 
 usage() {                                     
@@ -56,9 +57,9 @@ function create_k3d_cluster {
     exit
   elif [ -f "./k3d/${clustername}.conf" ]; then
     printf "%b" "\U1F525 Creating Kubernetes Cluster: \e[1;34m$clustername\e[0m "
-    k3d cluster create ${clustername} -c ./k3d/${clustername}.conf >> $k3d_log &
+    k3d cluster create ${clustername} -c ./conf/${clustername}.yaml >> $k3d_log &
   else
-    printf "%b" "\U1F440 Kubernetes cluster config: \e[1;34m${clustername}.conf\e[0m does not exist! Please check k3d dir! \n"
+    printf "%b" "\U1F440 Kubernetes cluster config: \e[1;34m${clustername}.yaml\e[0m does not exist! Please check k3d dir! \n"
     exit 1
   fi
 }
