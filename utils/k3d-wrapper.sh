@@ -76,7 +76,6 @@ function delete_k3d_cluster {
 
 function list_k3d_cluster {
   k3d_cl_status=$(k3d cluster list --no-headers | grep $clustername)
-  echo $k3d_cl_status
   if [ $k3d_cl_status ]; then
     printf "%b" "\U1F44D Cluster: \e[1;34m$clustername\e[0m exist!\n"
     printf "%b" "\e[1;32m---------------------------------------------\e[0m\n"
