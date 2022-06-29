@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 # WHEN:        WHO:             WHAT:
 # 04/08/2022   Janusz Kujawa    Created initial parts of script.
 # 04/22/2022   Janusz Kujawa	  Added invalid_option function
@@ -37,10 +37,10 @@ progress_k3d_cluster() {
       else
         if grep -q "deleted" "$k3d_log"; then
           echo -e "\n\U2705 Cluster: \e[1;34m$clustername\e[0m sucessfully deleted\n"
-          #printf "%b" "\n\U2705 Cluster: \e[1;34m$clustername\e[0m sucessfully deleted\n"
         elif grep -q "created" "$k3d_log"; then
+          echo -e "\n\U2705 Cluster: \e[1;34m$clustername\e[0m sucessfully created\n"
         else
-          printf "%b" "\n\U26A1 Unsupported!\n"
+          echo -e "\n\U26A1 Unsupported!\n"
         fi
         truncate -s 0 $k3d_log
         exit
@@ -52,16 +52,13 @@ progress_k3d_cluster() {
 function create_k3d_cluster {
   ### Create cluster if des not exist
   if [[ $(k3d cluster list --no-headers | grep $clustername) ]]; then
-    #printf "%b" "\U26D4 Cluster: \e[1;34m$clustername\e[0m already exist!\n"
-    echo -e "\U26D4 Cluster: \e[1;34m$clustername\e[0m already exist!\n"
+    printf "%b" "\U26D4 Cluster: \e[1;34m$clustername\e[0m already exist!\n"
     exit
-  elif [ -f "./k3d/${clustername}.conf" ]; thenć
-    echo -e "\U1F525 Creating Kubernetes Cluster: \e[1;34m$clustername\e[0m "
-    #printf "%b" "\U1F525 Creating Kubernetes Cluster: \e[1;34m$clustername\e[0m "
+  elif [ -f "./k3d/${clustername}.conf" ]; then
+    printf "%b" "\U1F525 Creating Kubernetes Cluster: \e[1;34m$clustername\e[0m "
     k3d cluster create ${clustername} -c ./k3d/${clustername}.conf >> $k3d_log &
   else
-    echo -e "\U1F440 Kubernetes cluster config: \e[1;34m${clustername}.conf\e[0m does not exist! Please check k3d dir! \n"
-    #printf "%b" "\U1F440 Kubernetes cluster config: \e[1;34m${clustername}.conf\e[0m does not exist! Please check k3d dir! \n"
+    printf "%b" "\U1F440 Kubernetes cluster config: \e[1;34m${clustername}.conf\e[0m does not exist! Please check k3d dir! \n"
     exit 1
   fi
 }
@@ -69,12 +66,10 @@ function create_k3d_cluster {
 function delete_k3d_cluster {
   ### Delete cluster if still exist
   if [[ $(k3d cluster list --no-headers | grep $clustername) ]]; then
-    echo -e "\U26A1 Cluster: \e[1;34m$clustername\e[0m exists and will be deleted "
-    #printf "%b" "\U26A1 Cluster: \e[1;34m$clustername\e[0m exists and will be deleted "
+    printf "%b" "\U26A1 Cluster: \e[1;34m$clustername\e[0m exists and will be deleted "
     k3d cluster delete $clustername >> $k3d_log 2>&1 &
   else
-    echo -e "\U1F631 Cluster: \e[1;34m$clustername\e[0m does not exist no action taken...\n"
-    #printf "%b" "\U1F631 Cluster: \e[1;34m$clustername\e[0m does not exist no action taken...\n"
+    printf "%b" "\U1F631 Cluster: \e[1;34m$clustername\e[0m does not exist no action taken...\n"
     exit
   fi
 }
@@ -82,12 +77,12 @@ function delete_k3d_cluster {
 function list_k3d_cluster {
   status=$(k3d cluster list --no-headers | grep $clustername)
   if [[ $status ]]; then
-    echo -e  "\U1F44D Cluster: \e[1;34m$clustername\e[0m exist!\n"
-    echo -e  "\e[1;32m---------------------------------------------\e[0m\n"
+    printf "%b" "\U1F44D Cluster: \e[1;34m$clustername\e[0m exist!\n"
+    printf "%b" "\e[1;32m---------------------------------------------\e[0m\n"
     k3d cluster list $clustername
-    echo -e  "\e[1;32m---------------------------------------------\e[0m\n"
+    printf "%b" "\e[1;32m---------------------------------------------\e[0m\n"
   else
-    echo -e  "\U274C Cluster: \e[1;34m$clustername\e[0m does not exist!\n"
+    printf "%b" "\U274C Cluster: \e[1;34m$clustername\e[0m does not exist!\n"
   
     
   fi
@@ -99,21 +94,22 @@ if [[ ! $@ =~ ^\-.+ ]]
     invalid_option
   fi
 
-while getopts "hcdl" options; do            
-                                                                                        
-  case $options in                          
-    h)
+#while getopts "hcdl" options; do            
+set -- $(getopt hcdl: "$@")
+while [ $# -gt 0 ]; do
+  case "$1" in                          
+    -h)
       usage                                        
       ;;
-    c)
+    -c)
       create_k3d_cluster
       progress_k3d_cluster
       ;;
-    d)
+    -d)
       delete_k3d_cluster
       progress_k3d_cluster
       ;;
-    l)
+    -l)
       list_k3d_cluster
       ;;
     *)                                        
