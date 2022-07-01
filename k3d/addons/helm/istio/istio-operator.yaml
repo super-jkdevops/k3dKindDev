@@ -1,0 +1,33 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: istio-operator
+  namespace: kube-system
+spec:
+  repo: https://devopsapp84.github.io/helm-repository
+  chart: istio-operator
+  targetNamespace: istio-system
+---
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  namespace: istio-system
+  name: example-istiocontrolplane
+spec:
+  profile: empty
+  components:
+    base:
+      enabled: true
+    pilot:
+      namespace: istio-system
+      enabled: true
+    ingressGateways:
+    - name: ingressgateway
+      namespace: istio-ingress
+      enabled: true
+      label:
+        istio: ingressgateway
+    egressGateways:
+    - name: egressgateway
+      namespace: istio-egress
+      enabled: true
