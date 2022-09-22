@@ -10,20 +10,24 @@ Before you starte please install docker on your host!
 ├── dev-cluster-121.conf
 ├── dev-cluster-122.conf
 ├── dev-cluster-123.conf
+├── dev-cluster-124.conf
 ├── dev-cluster.conf
+├── dev-cluster-no-lb.conf
 ├── dev-cluster-custom.conf
 ├── prod-cluster.conf
 └── stage-cluster.conf
 
 ```
 
-***dev-cluster***: 1x control plane + 3x worker node<br>
+***dev-cluster***: 	  1x control plane + 3x worker node<br>
+***dev-cluster-no-lb***:  1x control plane + 3x worker node<br>
 ***dev-cluster-custom***: 1x control plane + 3x worker node with istio onboarded<br>
-***stage-cluster***: 1x control plane + 4x worker node<br>
-***prod-cluster***: 3x control plane + 5x worker node<br>
-***dev-cluster-121***: 1x control plane + 3x worker node<br>
-***dev-cluster-122***: 1x control plane + 3x worker node<br>
-***dev-cluster-123***: 1x control plane + 3x worker node<br>
+***stage-cluster***: 	  1x control plane + 4x worker node<br>
+***prod-cluster***:       3x control plane + 5x worker node<br>
+***dev-cluster-121***:    1x control plane + 3x worker node<br>
+***dev-cluster-122***:    1x control plane + 3x worker node<br>
+***dev-cluster-123***:    1x control plane + 3x worker node<br>
+***dev-cluster-124***:    1x control plane + 3x worker node<br>
 
 ### Installation
 
