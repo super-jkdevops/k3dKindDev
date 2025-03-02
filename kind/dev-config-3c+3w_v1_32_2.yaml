@@ -1,0 +1,60 @@
+###
+# <<< Specification >>>
+# kubernetes version: 1.32.2
+# control plane nodes: 3
+# worker nodes: 3
+# port mapping: 9443:9443
+###
+
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+###
+# Control planes
+###
+- role: control-plane
+  image: kindest/node:v1.32.2@sha256:f226345927d7e348497136874b6d207e0b32cc52154ad8323129352923a3142f
+  extraPortMappings:
+  - containerPort: 9443
+    hostPort: 9443
+    listenAddress: "0.0.0.0"
+- role: control-plane
+  image: kindest/node:v1.32.2@sha256:f226345927d7e348497136874b6d207e0b32cc52154ad8323129352923a3142f
+  extraPortMappings:
+  - containerPort: 9443
+    hostPort: 9443
+    listenAddress: "0.0.0.0"
+    protocol: tcp
+   protocol: tcp
+- role: control-plane
+  image: kindest/node:v1.32.2@sha256:f226345927d7e348497136874b6d207e0b32cc52154ad8323129352923a3142f
+  extraPortMappings:
+  - containerPort: 9443
+    hostPort: 9443
+    listenAddress: "0.0.0.0"
+    protocol: tcp
+   protocol: tcp
+###
+# Worker nodes
+###
+- role: worker
+  image: kindest/node:v1.32.2@sha256:f226345927d7e348497136874b6d207e0b32cc52154ad8323129352923a3142f
+  extraPortMappings:
+  - containerPort: 9443
+    hostPort: 9443
+    listenAddress: "0.0.0.0"
+    protocol: tcp
+- role: worker
+  image: kindest/node:v1.32.2@sha256:f226345927d7e348497136874b6d207e0b32cc52154ad8323129352923a3142f
+  extraPortMappings:
+  - containerPort: 9443
+    hostPort: 9443
+    listenAddress: "0.0.0.0"
+    protocol: tcp
+- role: worker
+  image: kindest/node:v1.32.2@sha256:f226345927d7e348497136874b6d207e0b32cc52154ad8323129352923a3142f
+  extraPortMappings:
+  - containerPort: 9443
+    hostPort: 9443
+    listenAddress: "0.0.0.0"
+    protocol: tcp
